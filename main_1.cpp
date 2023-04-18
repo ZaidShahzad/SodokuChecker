@@ -35,7 +35,7 @@ std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 
 // Checks if the array given contains all the numbers (1-9)
-bool containsAllNumbers(std::vector<int> array) {
+bool containsAllNumbers(std::vector<int>& array) {
     int found = 0;
     for(int i = 0; i < numbers.size(); i++) {
         int numberToCheck = numbers[i];
@@ -48,7 +48,7 @@ bool containsAllNumbers(std::vector<int> array) {
 }
 
 // This function checks if a number is in the array
-bool isNumberInArray(int number, std::vector<int> array) {
+bool isNumberInArray(int& number, std::vector<int>& array) {
     for(int i = 0; i < array.size(); i++) {
         int numberInArray = array[i];
         if(number == numberInArray) return true;
@@ -58,7 +58,7 @@ bool isNumberInArray(int number, std::vector<int> array) {
 
 // This number checks if there are any duplicate numbers
 // in the array and uses the "isNumberInArray" function to check
-bool containsDuplicateNumbers(std::vector<int> array) {
+bool containsDuplicateNumbers(std::vector<int>& array) {
     std::vector<int> numbersFound;
     for(int i = 0; i < array.size(); i++) {
         int numberInArray = array[i];
@@ -69,7 +69,7 @@ bool containsDuplicateNumbers(std::vector<int> array) {
 }
 
 // This function checks if all the rows are good and solved
-bool areRowsSolved(std::vector<std::vector<int>> sodoku) {
+bool areRowsSolved(std::vector<std::vector<int>>& sodoku) {
     for(int i = 0; i < sodoku.size(); i++) {
         std::vector<int> row = sodoku[i];
         if(!containsAllNumbers(row)) return false;
@@ -79,7 +79,7 @@ bool areRowsSolved(std::vector<std::vector<int>> sodoku) {
 }
 
 // This function checks if all the cols are good and solved
-bool areColsSolved(std::vector<std::vector<int>> sodoku) {
+bool areColsSolved(std::vector<std::vector<int>>& sodoku) {
     for(int col = 0; col < 9; col++) {
         std::vector<int> colNumbers;
         for(int row = 0; row < 9; row++) {
@@ -95,7 +95,7 @@ bool areColsSolved(std::vector<std::vector<int>> sodoku) {
 // Get box numbers using indexes (there are 9 boxes in the board) [starts from 0]
 // This just gets the numbers for specific boxes (from the index you provide) and puts
 // the numbers in a array and returns the array
-std::vector<int> getBoxNumbersFromIndex(std::vector<std::vector<int>> sodoku, int boxIndex) {
+std::vector<int> getBoxNumbersFromIndex(std::vector<std::vector<int>>& sodoku, int& boxIndex) {
     std::vector<int> boxNumbers;
 
     // Gets the right starting positions depending on the box index
@@ -116,7 +116,7 @@ std::vector<int> getBoxNumbersFromIndex(std::vector<std::vector<int>> sodoku, in
 }
 
 // This function checks if all the boxes are good and solved
-bool areBoxesSolved(std::vector<std::vector<int>> sodoku) {
+bool areBoxesSolved(std::vector<std::vector<int>>& sodoku) {
     for(int i = 0; i < 9; i++) {
         std::vector<int> boxNumbers = getBoxNumbersFromIndex(sodoku, i);
         if(!containsAllNumbers(boxNumbers)) return false;
@@ -127,7 +127,7 @@ bool areBoxesSolved(std::vector<std::vector<int>> sodoku) {
 
 // This function makes sure that all the conditions are met
 // in order that the board is solved
-bool isBoardSolved(std::vector<std::vector<int>> sodoku) {
+bool isBoardSolved(std::vector<std::vector<int>>& sodoku) {
     if(!areRowsSolved(sodoku) || !areColsSolved(sodoku) || !areBoxesSolved(sodoku)) return false;
     return true;
 }
